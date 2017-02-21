@@ -10,7 +10,7 @@
 
   " disuse swapfiles
   set noswapfile
-  
+
   " backspace
   set backspace=2
 
