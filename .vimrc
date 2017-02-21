@@ -69,10 +69,6 @@
   nnoremap <leader>ev :vsplit $MYVIMRC<cr>
   nnoremap <leader>sv :source $MYVIMRC<cr>
 
-  " fase switch tab
-  nnoremap <c-l> <esc>:tabn<cr>
-  nnoremap <c-h> <esc>:tabp<cr>
-
   " fast switch buffer
   nnoremap <leader>p :bp<cr>
   nnoremap <leader>n :bn<cr>
@@ -137,7 +133,7 @@
   let g:ycm_autoclose_preview_window_after_completion=1
   let g:ycm_complete_in_comments = 1
   let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
-  let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
+  let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>', '<tab>']
   " Use tab
   function! TabFunction ()
       let line = getline('.')
