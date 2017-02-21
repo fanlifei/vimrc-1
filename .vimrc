@@ -54,18 +54,17 @@ nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 " auto dele trailing
 nnoremap <leader>w :%s/\s\+$//<cr>:let @/=''<cr>
-" tab options
+" switch tab
 nnoremap <c-l> <esc>:tabn<cr>
 nnoremap <c-h> <esc>:tabp<cr>
-" banned some key
-inoremap <esc> <nop>
-inoremap <down> <nop>
-inoremap <up> <nop>
-inoremap <left> <nop>
-inoremap <right> <nop>
-" buffer
+" switch buffer
 nnoremap <c-p> :bp<cr>
 nnoremap <c-n> :bn<cr>
+" smart way to move between windows
+noremap <c-j> <C-W>j
+noremap <c-k> <C-W>k
+noremap <c-h> <C-W>h
+noremap <c-l> <C-W>l
 
 """" Vundle """"
 " load bundle file
