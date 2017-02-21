@@ -5,13 +5,13 @@ let mapleader = ","
 
 """" Common """"
 " set help document language
-set helplang=cn 
+set helplang=cn
 " auto smart indent
 set autoindent
 set smartindent
 set expandtab
 " backspace deletes in insert mode
-set backspace=2 
+set backspace=2
 " softtabs, 2 spaces
 set shiftwidth=2
 set tabstop=2
@@ -27,7 +27,7 @@ set noswapfile
 " auto read when files change
 set autoread
 " set font size
-set guifont=Monaco:h12
+set guifont=Sauce_Code_Powerline:h12
 " set cursor line height
 set cursorline
 
@@ -36,7 +36,7 @@ if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
   syntax on
 endif
 
-" display gui scrollbar 
+" display gui scrollbar
 if has("gui_running")
   set guioptions-=r
   set guioptions-=l
@@ -52,7 +52,9 @@ inoremap <c-s> <esc>yyddkkpi
 " edit and apply .vimrc
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
-" tab options 
+" auto dele trailing
+nnoremap <leader>w :%s/\s\+$//<cr>:let @/=''<cr>
+" tab options
 nnoremap <c-l> <esc>:tabn<cr>
 nnoremap <c-h> <esc>:tabp<cr>
 " banned some key
@@ -61,6 +63,9 @@ inoremap <down> <nop>
 inoremap <up> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
+" buffer
+nnoremap <c-p> :bp<cr>
+nnoremap <c-n> :bn<cr>
 
 """" Vundle """"
 " load bundle file
@@ -72,17 +77,21 @@ endif
 " molokai
 colorscheme molokai
 
+" ctrlp
+let g:ctrlp_show_hidden = 1
+
 " Emmet.vim
 let g:user_emmet_expandabbr_key = '<c-e>'
 
-" NERDTree 
-noremap <c-b> :NERDTreeToggle<CR>
+" NERDTree
+let NERDTreeShowHidden=1
+noremap <c-b> :NERDTreeToggle<cr>
 "  autocmd vimenter * NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") &&b:NERDTreeType == "primary") | q | endif
 
 " YouCompleteMe
 " http://efe.baidu.com/blog/vim-javascript-completion/#youcompleteme
-let g:ycm_min_num_of_chars_for_completion = 3 
+let g:ycm_min_num_of_chars_for_completion = 3
 let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_complete_in_comments = 1
 let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
@@ -127,3 +136,10 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exec = 'eslint'
+
+" airline
+let g:airline_theme="luna"
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+
