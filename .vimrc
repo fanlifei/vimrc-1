@@ -62,16 +62,34 @@
   " esc to normal mode
   inoremap jk <esc>
 
+  " treat long lines as break lines 
+  nnoremap k gk
+  nnoremap gk k
+  nnoremap j gj
+  nnoremap gj j
+
+  " banned arror key
+  map <left> <nop>
+  map <right> <nop>
+  map <up> <nop>
+  map <down> <nop>
+
+  noremap H ^
+  noremap L $
+
   " exchange with the above line
   inoremap <c-s> <esc>yyddkkpi
+
+  " open conque term
+  noremap <leader>sh :ConqueTerm zsh<cr>
 
   " fast configure .vimrc
   nnoremap <leader>ev :vsplit $MYVIMRC<cr>
   nnoremap <leader>sv :source $MYVIMRC<cr>
 
   " fast switch buffer
-  nnoremap <leader>p :bp<cr>
-  nnoremap <leader>n :bn<cr>
+  nnoremap <leader>n :bp<cr>
+  nnoremap <leader>m :bn<cr>
 
   " smart way to move between windows
   noremap <c-j> <C-W>j
@@ -89,6 +107,7 @@
     Plug 'JSON.vim'
     Plug 'ShowTrailingWhitespace'
     Plug 'wakatime/vim-wakatime'
+    Plug 'tpope/vim-markdown'
     Plug 'tomasr/molokai'
     " Plug 'liuchengxu/space-vim-dark'
     Plug 'scrooloose/nerdtree'
@@ -104,9 +123,12 @@
     Plug 'pangloss/vim-javascript'
     Plug 'marijnh/tern_for_vim'
     Plug 'scrooloose/syntastic'
-    Plug 'justinj/vim-react-snippets', { 'for': ['js', 'jsx']}
+    Plug 'rosenfeld/conque-term'
+    Plug 'mxw/vim-jsx'
+    Plug 'justinj/vim-react-snippets'
     Plug 'SirVer/ultisnips'
     Plug 'honza/vim-snippets'
+    Plug 'briancollins/vim-jst'
   call plug#end()
 " }}}
 
@@ -117,6 +139,11 @@
 " ----- Plugin Configure Settings ----- {{{
   " ctrlp
   let g:ctrlp_show_hidden = 1
+  let g:ctrlp_working_path_mode=0
+  let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v[\/]\.(git|node_modules)$',
+    \ 'file': '\v\.(exe|so|dll)$',
+  \ }
 
   " Emmet.vim
   let g:user_emmet_expandabbr_key = '<c-e>'
@@ -128,24 +155,12 @@
   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") &&b:NERDTreeType == "primary") | q | endif
 
   " YouCompleteMe
-  " http://efe.baidu.com/blog/vim-javascript-completion/#youcompleteme
+  let g:ycm_auto_trigger = 1
   let g:ycm_min_num_of_chars_for_completion = 3
   let g:ycm_autoclose_preview_window_after_completion=1
   let g:ycm_complete_in_comments = 1
-  let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
-  let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>', '<tab>']
-  " Use tab
-  function! TabFunction ()
-      let line = getline('.')
-      let substr = strpart(line, -1, col('.')+1)
-      let substr = matchstr(substr, "[^ \t]*$")
-      if strlen(substr) == 0
-          return "\<tab>"
-      endif
-      return pumvisible() ? "\<c-n>" : "\<c-x>\<c-o>"
-  endfunction
-  inoremap <tab> <c-r>=TabFunction()<cr>
-
+  let g:ycm_key_list_select_completion = ['<c-n>']
+  let g:ycm_key_list_previous_completion = ['<c-p>']
   let g:ycm_semantic_triggers = {
       \   'css': [ 're!^\s{2}', 're!:\s+'],
       \   'html': [ '</' ],
@@ -180,4 +195,7 @@
   let g:airline_powerline_fonts = 1
   let g:airline#extensions#tabline#enabled = 1
   let g:airline#extensions#tabline#buffer_nr_show = 1
+
+  " vim-jsx
+  let g:jsx_ext_required = 0
 " }}}
