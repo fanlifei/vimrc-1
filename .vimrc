@@ -68,9 +68,6 @@
   " esc to normal mode
   inoremap jk <ESC>
 
-  " fast save
-  nnoremap <Leader>w :w<CR>
-
   " treat long lines as break lines
   nnoremap k gk
   nnoremap gk k
@@ -101,10 +98,10 @@
   nnoremap <leader>m :bn<cr>
 
   " smart way to move between windows
-  nnoremap <Leader>j <C-W>j
-  nnoremap <Leader>k <C-W>k
-  nnoremap <Leader>h <C-W>h
-  nnoremap <Leader>l <C-W>l
+  nnoremap <C-j> <C-W>j
+  nnoremap <C-k> <C-W>k
+  nnoremap <C-h> <C-W>h
+  nnoremap <C-l> <C-W>l
 " }}}
 
 " ----- Plugin Settings ----- {{{
