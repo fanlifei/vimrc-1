@@ -1,6 +1,6 @@
 " ----- Basic Settings ----- {{{
   set nocompatible
-  let mapleader = ","
+  let mapleader = " "
 
   " help language
   set helplang=cn
@@ -12,7 +12,7 @@
   set noswapfile
 
   " backspace
-  set backspace=2
+  set backspace=eol,start,indent
 
   " indent
   set autoindent
@@ -28,12 +28,18 @@
   " search
   set ignorecase
   set smartcase
+  set hlsearch
+  set incsearch
 
   " status line
   set laststatus=2
 
   " cursor
+  set ruler
   set cursorline
+
+  " scroll off, always 10 row after cursor
+  set scrolloff=10
 
   " filetype plugins
   filetype plugin on
@@ -46,7 +52,7 @@
     set guifont=Sauce_Code_Powerline:h12
 
     " display gui scrollbar
-    set guioptions-=r
+    et guioptions-=r
     set guioptions-=l
     set guioptions-=L
   endif
@@ -60,28 +66,31 @@
 
 " ----- Mappings Settings ----- {{{
   " esc to normal mode
-  inoremap jk <esc>
+  inoremap jk <ESC>
 
-  " treat long lines as break lines 
+  " fast save
+  nnoremap <Leader>w :w<CR>
+
+  " treat long lines as break lines
   nnoremap k gk
   nnoremap gk k
   nnoremap j gj
   nnoremap gj j
 
-  " banned arror key
-  map <left> <nop>
-  map <right> <nop>
-  map <up> <nop>
-  map <down> <nop>
+  " banned direction key
+  inoremap <LEFT> <NOP>
+  inoremap <RIGHT> <NOP>
+  inoremap <UP> <NOP>
+  inoremap <DOWN> <NOP>
 
   noremap H ^
   noremap L $
 
-  " exchange with the above line
-  inoremap <c-s> <esc>yyddkkpi
-
-  " open conque term
-  noremap <leader>sh :ConqueTerm zsh<cr>
+  " open term on neovim
+  if has('nvim')
+    noremap <leader>sh :bo sp term://zsh\|resize 10<CR>i
+    tnoremap jk <C-\><C-n>
+  endif
 
   " fast configure .vimrc
   nnoremap <leader>ev :vsplit $MYVIMRC<cr>
@@ -92,52 +101,68 @@
   nnoremap <leader>m :bn<cr>
 
   " smart way to move between windows
-  noremap <c-j> <C-W>j
-  noremap <c-k> <C-W>k
-  noremap <c-h> <C-W>h
-  noremap <c-l> <C-W>l
+  nnoremap <Leader>j <C-W>j
+  nnoremap <Leader>k <C-W>k
+  nnoremap <Leader>h <C-W>h
+  nnoremap <Leader>l <C-W>l
 " }}}
 
 " ----- Plugin Settings ----- {{{
   call plug#begin('~/.vim/plugged')
     Plug 'junegunn/vim-plug'
 
-    Plug 'Emmet.vim'
-    Plug 'taglist.vim'
+    " language
     Plug 'JSON.vim'
-    Plug 'ShowTrailingWhitespace'
-    Plug 'wakatime/vim-wakatime'
+    Plug 'cespare/vim-toml'
     Plug 'tpope/vim-markdown'
-    Plug 'tomasr/molokai'
-    " Plug 'liuchengxu/space-vim-dark'
+    Plug 'pangloss/vim-javascript'
+    Plug 'mxw/vim-jsx'
+
+    " interface
     Plug 'scrooloose/nerdtree'
     Plug 'Xuyuanp/nerdtree-git-plugin'
-    Plug 'kien/ctrlp.vim'
     Plug 'airblade/vim-gitgutter'
-    Plug 'Valloric/YouCompleteMe'
-    Plug 'scrooloose/nerdcommenter'
     Plug 'bling/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
+
+    " helper
+    Plug 'taglist.vim'
+    Plug 'kien/ctrlp.vim'
+    Plug 'scrooloose/nerdcommenter'
     Plug 'Raimondi/delimitMate'
-    Plug 'easymotion/vim-easymotion'
-    Plug 'pangloss/vim-javascript'
+    " Plug 'easymotion/vim-easymotion'
+    Plug 'ShowTrailingWhitespace'
+    Plug 'wakatime/vim-wakatime'
+
+    " syntax lint
+    " Plug 'scrooloose/syntastic'
+    Plug 'w0rp/ale'
+
+    " snippets
+    Plug 'Emmet.vim'
+    Plug 'Valloric/YouCompleteMe'
     Plug 'marijnh/tern_for_vim'
-    Plug 'scrooloose/syntastic'
-    Plug 'rosenfeld/conque-term'
-    Plug 'mxw/vim-jsx'
-    Plug 'justinj/vim-react-snippets'
     Plug 'SirVer/ultisnips'
     Plug 'honza/vim-snippets'
-    Plug 'briancollins/vim-jst'
+    Plug 'justinj/vim-react-snippets'
+
+    " color scheme
+    Plug 'flazz/vim-colorschemes'
+    Plug 'tomasr/molokai'
+    Plug 'joshdick/onedark.vim'
+    Plug 'chriskempson/tomorrow-theme'
   call plug#end()
 " }}}
 
 " ----- Color Scheme Settings ----- {{{
-  colorscheme molokai
+  syntax enable
+  set background=dark
+  colorscheme Tomorrow-Night-Eighties
 " }}}
 
 " ----- Plugin Configure Settings ----- {{{
   " ctrlp
+  let g:ctrlp_cmd = 'CtrlPMRU'
   let g:ctrlp_show_hidden = 1
   let g:ctrlp_working_path_mode=0
   let g:ctrlp_custom_ignore = {
@@ -146,7 +171,7 @@
   \ }
 
   " Emmet.vim
-  let g:user_emmet_expandabbr_key = '<c-e>'
+  let g:user_emmet_expandabbr_key = '<C-e>'
 
   " NERDTree
   let NERDTreeShowHidden=1
@@ -159,8 +184,8 @@
   let g:ycm_min_num_of_chars_for_completion = 3
   let g:ycm_autoclose_preview_window_after_completion=1
   let g:ycm_complete_in_comments = 1
-  let g:ycm_key_list_select_completion = ['<c-n>']
-  let g:ycm_key_list_previous_completion = ['<c-p>']
+  let g:ycm_key_list_select_completion = ['<C-n>']
+  let g:ycm_key_list_previous_completion = ['<C-m>']
   let g:ycm_semantic_triggers = {
       \   'css': [ 're!^\s{2}', 're!:\s+'],
       \   'html': [ '</' ],
@@ -178,20 +203,8 @@
   let g:Tlist_Exit_OnlyWindow=1
   let g:Tlist_Use_Right_Window=1
 
-  " syntastic
-  set statusline+=%#warningmsg#
-  set statusline+=%{SyntasticStatuslineFlag()}
-  set statusline+=%*
-
-  let g:syntastic_always_populate_loc_list = 1
-  let g:syntastic_auto_loc_list = 1
-  let g:syntastic_check_on_open = 1
-  let g:syntastic_check_on_wq = 0
-  let g:syntastic_javascript_checkers = ['eslint']
-  let g:syntastic_javascript_eslint_exec = 'eslint'
-
   " airline
-  let g:airline_theme="luna"
+  let g:airline_theme="tomorrow"
   let g:airline_powerline_fonts = 1
   let g:airline#extensions#tabline#enabled = 1
   let g:airline#extensions#tabline#buffer_nr_show = 1
