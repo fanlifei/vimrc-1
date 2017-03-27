@@ -75,17 +75,17 @@
   nnoremap gj j
 
   " banned direction key
-  inoremap <LEFT> <NOP>
-  inoremap <RIGHT> <NOP>
-  inoremap <UP> <NOP>
-  inoremap <DOWN> <NOP>
+  noremap <LEFT> <NOP>
+  noremap <RIGHT> <NOP>
+  noremap <UP> <NOP>
+  noremap <DOWN> <NOP>
 
   noremap H ^
   noremap L $
 
   " open term on neovim
   if has('nvim')
-    noremap <leader>sh :bo sp term://zsh\|resize 10<CR>i
+    noremap <leader>sh :bo sp term://zsh\|resize 8<CR>i
     tnoremap jk <C-\><C-n>
   endif
 
@@ -102,6 +102,10 @@
   nnoremap <C-k> <C-W>k
   nnoremap <C-h> <C-W>h
   nnoremap <C-l> <C-W>l
+
+  " continuous indent
+  vnoremap < <v
+  vnoremap > >v
 " }}}
 
 " ----- Plugin Settings ----- {{{
@@ -114,6 +118,7 @@
     Plug 'tpope/vim-markdown'
     Plug 'pangloss/vim-javascript'
     Plug 'mxw/vim-jsx'
+    Plug 'blockloop/vim-swigjs'
 
     " interface
     Plug 'scrooloose/nerdtree'
@@ -146,15 +151,16 @@
     " color scheme
     Plug 'flazz/vim-colorschemes'
     Plug 'tomasr/molokai'
-    Plug 'joshdick/onedark.vim'
     Plug 'chriskempson/tomorrow-theme'
+    Plug 'ajh17/spacegray.vim'
   call plug#end()
 " }}}
 
 " ----- Color Scheme Settings ----- {{{
   syntax enable
   set background=dark
-  colorscheme Tomorrow-Night-Eighties
+  " colorscheme Tomorrow-Night-Bright
+  colorscheme spacegray
 " }}}
 
 " ----- Plugin Configure Settings ----- {{{
@@ -201,7 +207,7 @@
   let g:Tlist_Use_Right_Window=1
 
   " airline
-  let g:airline_theme="tomorrow"
+  let g:airline_theme="jellybeans"
   let g:airline_powerline_fonts = 1
   let g:airline#extensions#tabline#enabled = 1
   let g:airline#extensions#tabline#buffer_nr_show = 1
