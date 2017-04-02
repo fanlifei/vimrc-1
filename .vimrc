@@ -93,6 +93,8 @@
   nnoremap <leader>ev :vsplit $MYVIMRC<cr>
   nnoremap <leader>sv :source $MYVIMRC<cr>
 
+  nnoremap <leader>w :%s/\s\+$//<CR>:let @/=''<CR>
+
   " fast switch buffer
   nnoremap <leader>n :bp<cr>
   nnoremap <leader>m :bn<cr>
@@ -129,7 +131,9 @@
 
     " helper
     Plug 'taglist.vim'
-    Plug 'kien/ctrlp.vim'
+    " Plug 'kien/ctrlp.vim'
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf.vim'
     Plug 'scrooloose/nerdcommenter'
     Plug 'Raimondi/delimitMate'
     " Plug 'easymotion/vim-easymotion'
@@ -164,14 +168,9 @@
 " }}}
 
 " ----- Plugin Configure Settings ----- {{{
-  " ctrlp
-  let g:ctrlp_cmd = 'CtrlPMRU'
-  let g:ctrlp_show_hidden = 1
-  let g:ctrlp_working_path_mode=0
-  let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/]\.(git|node_modules)$',
-    \ 'file': '\v\.(exe|so|dll)$',
-  \ }
+  " FZF
+  noremap <C-p> :Files<CR>
+  noremap <Leader><Leader> :Buffers<CR>
 
   " Emmet.vim
   let g:user_emmet_expandabbr_key = '<C-e>'
@@ -184,10 +183,10 @@
 
   " YouCompleteMe
   let g:ycm_auto_trigger = 1
-  let g:ycm_min_num_of_chars_for_completion = 3
+  let g:ycm_min_num_of_chars_for_completion = 2
   let g:ycm_autoclose_preview_window_after_completion=1
   let g:ycm_complete_in_comments = 1
-  let g:ycm_key_list_select_completion = ['<C-n>']
+  let g:ycm_key_list_select_completion = ['<C-n>', '<TAB>']
   let g:ycm_key_list_previous_completion = ['<C-m>']
   let g:ycm_semantic_triggers = {
       \   'css': [ 're!^\s{2}', 're!:\s+'],
