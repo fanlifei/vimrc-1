@@ -105,9 +105,6 @@
   nnoremap <C-h> <C-W>h
   nnoremap <C-l> <C-W>l
 
-  " continuous indent
-  vnoremap < <v
-  vnoremap > >v
 " }}}
 
 " ----- Plugin Settings ----- {{{
@@ -152,6 +149,9 @@
     Plug 'honza/vim-snippets'
     Plug 'justinj/vim-react-snippets'
 
+    " Wiki
+    Plug 'vimwiki/vimwiki'
+
     " color scheme
     Plug 'flazz/vim-colorschemes'
     Plug 'tomasr/molokai'
@@ -168,9 +168,20 @@
 " }}}
 
 " ----- Plugin Configure Settings ----- {{{
+  " Wiki
+  let g:vimwiki_list = [{
+      \   "path": "~/Documents/Wiki/",
+      \   "path_html": "~/Documents/Wiki/public/",
+      \ }]
+
   " FZF
   noremap <C-p> :Files<CR>
   noremap <Leader><Leader> :Buffers<CR>
+
+  " ale
+  let g:ale_linters = {
+  \   'javascript': ['eslint'],
+  \ }
 
   " Emmet.vim
   let g:user_emmet_expandabbr_key = '<C-e>'
