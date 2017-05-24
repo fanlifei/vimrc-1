@@ -46,13 +46,14 @@
   filetype indent on
 " }}}
 
+  set encoding=utf8
 " ----- GUI Settings ----- {{{
   if has("gui_running")
     " set gui font & size
-    set guifont=Sauce_Code_Powerline:h12
+    set guifont=Sauce_Code_Pro_Nerd_Font_Complete:h12
 
     " display gui scrollbar
-    et guioptions-=r
+    set guioptions-=r
     set guioptions-=l
     set guioptions-=L
   endif
@@ -117,24 +118,29 @@
     Plug 'tpope/vim-markdown'
     Plug 'pangloss/vim-javascript'
     Plug 'mxw/vim-jsx'
+    Plug 'fatih/vim-go'
     Plug 'blockloop/vim-swigjs'
+    Plug 'briancollins/vim-jst'
 
     " interface
     Plug 'scrooloose/nerdtree'
     Plug 'Xuyuanp/nerdtree-git-plugin'
+    Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+    Plug 'ryanoasis/vim-devicons'
     Plug 'airblade/vim-gitgutter'
     Plug 'bling/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
 
     " helper
     Plug 'taglist.vim'
-    " Plug 'kien/ctrlp.vim'
+    Plug 'mileszs/ack.vim'
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'junegunn/fzf.vim'
     Plug 'scrooloose/nerdcommenter'
     Plug 'Raimondi/delimitMate'
-    " Plug 'easymotion/vim-easymotion'
+    Plug 'easymotion/vim-easymotion'
     Plug 'ShowTrailingWhitespace'
+    Plug 'sheerun/vim-polyglot'
     Plug 'wakatime/vim-wakatime'
 
     " syntax lint
@@ -149,34 +155,25 @@
     Plug 'honza/vim-snippets'
     Plug 'justinj/vim-react-snippets'
 
-    " Wiki
-    Plug 'vimwiki/vimwiki'
-
     " color scheme
-    Plug 'flazz/vim-colorschemes'
     Plug 'tomasr/molokai'
-    Plug 'chriskempson/tomorrow-theme'
     Plug 'ajh17/spacegray.vim'
+    Plug 'joshdick/onedark.vim'
   call plug#end()
 " }}}
 
 " ----- Color Scheme Settings ----- {{{
   syntax enable
   set background=dark
-  " colorscheme Tomorrow-Night-Bright
-  colorscheme spacegray
+  " colorscheme molokai
+  " colorscheme spacegray
+  colorscheme onedark
 " }}}
 
 " ----- Plugin Configure Settings ----- {{{
-  " Wiki
-  let g:vimwiki_list = [{
-      \   "path": "~/Documents/Wiki/",
-      \   "path_html": "~/Documents/Wiki/public/",
-      \ }]
-
   " FZF
-  noremap <C-p> :Files<CR>
-  noremap <Leader><Leader> :Buffers<CR>
+  nnoremap <Leader>p :Buffers<CR>
+  nnoremap <C-p> :Files<CR>
 
   " ale
   let g:ale_linters = {
@@ -191,6 +188,12 @@
   noremap <c-b> :NERDTreeToggle<cr>
   "  autocmd vimenter * NERDTree
   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") &&b:NERDTreeType == "primary") | q | endif
+  " nerdtree syntax highlight
+  let g:NERDTreeFileExtensionHighlightFullName = 1
+  let g:NERDTreeExactMatchHighlightFullName = 1
+  let g:NERDTreePatternMatchHighlightFullName = 1
+  let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
+  let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
 
   " YouCompleteMe
   let g:ycm_auto_trigger = 1
