@@ -97,8 +97,8 @@
   nnoremap <leader>w :%s/\s\+$//<CR>:let @/=''<CR>
 
   " fast switch buffer
-  nnoremap <leader>n :bp<cr>
-  nnoremap <leader>m :bn<cr>
+  nnoremap - :bp<cr>
+  nnoremap = :bn<cr>
 
   " smart way to move between windows
   nnoremap <C-j> <C-W>j
