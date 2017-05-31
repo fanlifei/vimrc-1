@@ -105,7 +105,6 @@
   nnoremap <C-k> <C-W>k
   nnoremap <C-h> <C-W>h
   nnoremap <C-l> <C-W>l
-
 " }}}
 
 " ----- Plugin Settings ----- {{{
@@ -136,6 +135,7 @@
     Plug 'mileszs/ack.vim'
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'junegunn/fzf.vim'
+    Plug 'ervandew/supertab'
     Plug 'scrooloose/nerdcommenter'
     Plug 'Raimondi/delimitMate'
     Plug 'easymotion/vim-easymotion'
@@ -175,6 +175,9 @@
   nnoremap <Leader>p :Buffers<CR>
   nnoremap <C-p> :Files<CR>
 
+  " SuperTab
+  let g:SuperTabDefaultCompletionType = "<c-n>"
+
   " ale
   let g:ale_linters = {
   \   'javascript': ['eslint'],
@@ -200,7 +203,7 @@
   let g:ycm_min_num_of_chars_for_completion = 2
   let g:ycm_autoclose_preview_window_after_completion=1
   let g:ycm_complete_in_comments = 1
-  let g:ycm_key_list_select_completion = ['<C-n>', '<TAB>']
+  let g:ycm_key_list_select_completion = ['<C-n>']
   let g:ycm_key_list_previous_completion = ['<C-m>']
   let g:ycm_semantic_triggers = {
       \   'css': [ 're!^\s{2}', 're!:\s+'],
